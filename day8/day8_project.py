@@ -1,0 +1,34 @@
+from alphabet_file import alphabet
+from art import logo
+
+print(logo)
+go_again = True
+while go_again:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+        
+    def caesar(start_text, shift_amount, cipher_direction):
+        end_text = ""
+        if cipher_direction == "decode":
+            shift_amount *= -1
+        for char in start_text:
+            if char in alphabet:
+                position = alphabet.index(char)
+                new_position = position + shift_amount
+                end_text += alphabet[new_position]
+            else:
+                end_text += char
+        print(f"The {cipher_direction}d text is {end_text}.")
+        go_again = input("Type 'yes' if you want to go again. Otherwise type 'no'")
+        
+    shift = shift%26
+    caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
+    
+    result = input("Type 'yes' if you want to go again. Otherwise type 'no'.\n")
+    if result == "no":
+        go_again = False
+        print("Goodbye")
+    
+        
+        
